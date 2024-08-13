@@ -1,8 +1,9 @@
 {
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:sbruder/nixpkgs/polkit-cross-fix";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:sbruder/nixpkgs/polkit-cross-fix";
     rust-overlay.url = "github:oxalica/rust-overlay";
+    # NOTE: do we need to re-add flake-utils here?
   };
 
   outputs = { self, nixpkgs, rust-overlay }: {
