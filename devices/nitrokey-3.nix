@@ -2,21 +2,19 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "nitrokey-3-firmware";
-  version = "unstable-2022-08-10";
+  version = "1.7.2";
 
   src = fetchFromGitHub {
     owner = "Nitrokey";
     repo = pname;
-    rev = "ffd3524f03d6e8ff66c20ea184a9996a047aeb50";
-    sha256 = "sha256-AuG7U33QRTToYwoTNXhzVRI9CyCEvUicIABk/yCwdpo=";
+    rev = "v${version}";
+    sha256 = "sha256-zl3kSgMJrfn7RAN3sabZvCp6hqWc2Ffma29KL5eP6kg=";
   };
-
-  sourceRoot = "source/runners/lpc55";
 
   nativeBuildInputs = [ cargo-binutils flip-link gcc-arm-embedded ];
 
   cargoLock = {
-    lockFile = "${src}/runners/lpc55/Cargo.lock";
+    lockFile = "${src}/Cargo.lock";
     outputHashes = {
       "fido-authenticator-0.1.0" = "sha256-sOYuAus1IBFDaD2LGpqENLCtTsaWS90aEqsjjA1Spkg=";
       "trussed-0.1.0" = "sha256-2Gl+f6meuskCM4XkKeHNwKVUu0LhBpyuDyOPvJ/aibM=";

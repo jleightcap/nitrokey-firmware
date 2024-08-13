@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "nitrokey-fido2-firmware";
-  version = "2.4.1";
+  version = "2.4.3";
 
   src = fetchFromGitHub {
     owner = "Nitrokey";
     repo = pname;
     rev = "${version}.nitrokey";
-    sha256 = "sha256-7AsnxRf8mdybI6Mup2mV01U09r5C/oUX6fG2ymkkOOo=";
+    sha256 = "";
     fetchSubmodules = true;
   };
 
