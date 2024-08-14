@@ -1,0 +1,4 @@
+[nitrokey-3-firmware]
+src.github = "nitrokey/nitrokey-3-firmware"
+fetch.github = "nitrokey/nitrokey-3-firmware"
+cargo_locks = [ "Cargo.lock"]
