@@ -13,9 +13,11 @@ let
   };
 
   rustPlatform = makeRustPlatform {
-    cargo = rust-bin.fromRustupToolchainFile "${src}/rust-toolchain.toml";
-    rustc = rust-bin.fromRustupToolchainFile "${src}/rust-toolchain.toml";
-  };
+    cargo = rust-bin.selectLatestNightlyWith (toolchain: toolchain.default);
+    rustc = rust-bin.selectLatestNightlyWith (toolchain: toolchain.default);
+    
+     };
+
 
 in
 
@@ -59,6 +61,20 @@ rustPlatform.buildRustPackage rec {
   dontCargoInstall = true;
   doCheck = false;
 
+  # lld: error: unknown argument '-Wl,--undefined=AUDITABLE_VERSION_INFO'
+  # https://github.com/cloud-hypervisor/rust-hypervisor-firmware/issues/249
+  auditable = false;
+
+  buildPhase = ''
+    make binaries
+  '';
+
+  installPhase = ''
+  runHook preInstall
+    cp -v binaries $out
+    runHook postInstall
+  '';
+
   # removed objdump
   makeFlags = [ "BOARD=${board}" "PROVISIONER=${toString provisioner}" "DEVELOP=${toString develop}" ];
 
@@ -66,13 +82,15 @@ rustPlatform.buildRustPackage rec {
   env."CC_thumbv7em-none-eabihf" = "arm-none-eabi-gcc";
   LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
 
-  installPhase = ''
-    runHook preInstall
+  #installPhase = ''
+  #  runHook preInstall
     # mkdir $out
     # cp ${if provisioner then "provisioner" else "firmware"}-${board}${lib.optionalString develop "-develop"}.bin $out/
-    find . -name '*.bin' 
-    runHook postInstall
-  '';
+    #find . -name '*.bin' 
+  #  ls binaries
+  #  exit 1
+  #  runHook postInstall
+  #'';
 
   meta = with lib; {
     description = "Firmware for the Nitrokey 3 device";

@@ -1,7 +1,7 @@
 final: prev: {
   nitrokey-3 = prev.callPackage ./devices/nitrokey-3.nix (
     let
-      rust = prev.rust-bin.stable.latest.default.override {
+      rust = prev.rust-bin.nightly.latest.default.override {
         extensions = [ "llvm-tools-preview" ];
         targets = [ "thumbv8m.main-none-eabi" ];
       };
