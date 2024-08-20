@@ -13,8 +13,8 @@ let
   };
 
   rustPlatform = makeRustPlatform rec {
-    rustc = rust-bin.nightly.latest.default.override {
-      extensions = [ "llvm-tools-preview" ];
+    rustc = rust-bin.nightly."2024-04-01".default.override {
+      extensions = [ "llvm-tools-preview" "rust-src" "rustfmt" "clippy" ];
       targets = [ "thumbv7em-none-eabihf" "thumbv8m.main-none-eabi" ];
     };
     cargo = rustc;  
