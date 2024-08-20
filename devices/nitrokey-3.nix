@@ -27,6 +27,7 @@ rustPlatform.buildRustPackage rec {
   inherit src version pname;
 
   nativeBuildInputs = [ cargo-binutils flip-link gcc-arm-embedded llvmPackages.clang python3 ];     
+  patches = [ ./nitrokey-3-inline-threshold.patch ];
 
   cargoLock = {
     lockFile = "${src}/Cargo.lock";
