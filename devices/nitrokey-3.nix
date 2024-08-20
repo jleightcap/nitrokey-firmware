@@ -69,12 +69,13 @@ rustPlatform.buildRustPackage rec {
   auditable = false;
 
   buildPhase = ''
-    make binaries
+    mkdir -p binaries
+    make -C runners/embedded build-all FEATURES=
   '';
 
   installPhase = ''
-  runHook preInstall
-    cp -v binaries $out
+    runHook preInstall
+    cp -rv binaries $out
     runHook postInstall
   '';
 
