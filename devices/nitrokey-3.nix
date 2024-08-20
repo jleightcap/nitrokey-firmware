@@ -52,6 +52,23 @@ let
     cargo = rustc;
   };
 
+  buildTarget =
+    {
+      "nk3xn" = {
+        makeTarget = "build-nk3xn";
+        makefilePath = "runners/embedded";
+      };
+      "nk3am" = {
+        makeTarget = "build-nk3am.bl";
+        makefilePath = "runners/embedded";
+      };
+      "nkpk" = {
+        makeTarget = "build";
+        makefilePath = "runners/nkpk";
+      };
+    }
+    ."${board}";
+
 in
 
 rustPlatform.buildRustPackage rec {
@@ -123,23 +140,12 @@ rustPlatform.buildRustPackage rec {
   # $(MAKE) -C runners/embedded build-all FEATURES=test
   # https://github.com/Nitrokey/nitrokey-3-firmware/blob/main/Makefile#L18-L33
   buildPhase = ''
-        mkdir -p binaries
-    	make -C runners/embedded build-all FEATURES=
-    	cp runners/embedded/artifacts/runner-lpc55-nk3xn.bin binaries/firmware-nk3xn.bin
-    	cp runners/embedded/artifacts/runner-nrf52-bootloader-nk3am.bin.ihex binaries/firmware-nk3am.ihex
-    	make -C runners/embedded build-all FEATURES=provisioner
-    	cp runners/embedded/artifacts/runner-lpc55-nk3xn.bin binaries/provisioner-nk3xn.bin
-    	cp runners/embedded/artifacts/runner-nrf52-bootloader-nk3am.bin.ihex binaries/provisioner-nk3am.ihex
-    	make -C runners/nkpk build
-    	cp runners/nkpk/artifacts/runner-nkpk.bin.ihex binaries/firmware-nkpk.ihex
-    	make -C runners/nkpk build FEATURES=provisioner
-    	cp runners/nkpk/artifacts/runner-nkpk.bin.ihex binaries/provisioner-nkpk.ihex
+    make -C ${buildTarget.makefilePath} ${buildTarget.makeTarget} FEATURES=${lib.optionalString provisioner "provisioner"}
   '';
 
   installPhase = ''
     runHook preInstall
-    mkdir $out
-    cp -rv binaries $out
+    cp -r ${buildTarget.makefilePath}/artifacts $out
     runHook postInstall
   '';
 
