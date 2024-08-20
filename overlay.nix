@@ -1,18 +1,5 @@
 final: prev: {
-  nitrokey-3 = prev.callPackage ./devices/nitrokey-3.nix (
-    let
-      rust = prev.rust-bin.nightly.latest.default.override {
-        extensions = [ "llvm-tools-preview" ];
-        targets = [ "thumbv8m.main-none-eabi" ];
-      };
-    in
-    {
-      rustPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform {
-        rustc = rust;
-        cargo = rust;
-      });
-    }
-  );
+  nitrokey-3 = prev.callPackage ./devices/nitrokey-3.nix {};
   nitrokey-fido2 = prev.callPackage ./devices/nitrokey-fido2.nix { };
   nitrokey-pro = prev.callPackage ./devices/nitrokey-pro.nix { };
   nitrokey-start = prev.callPackage ./devices/nitrokey-start.nix { };

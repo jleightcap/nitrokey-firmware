@@ -12,11 +12,13 @@ let
     sha256 = "sha256-zl3kSgMJrfn7RAN3sabZvCp6hqWc2Ffma29KL5eP6kg=";
   };
 
-  rustPlatform = makeRustPlatform {
-    cargo = rust-bin.selectLatestNightlyWith (toolchain: toolchain.default);
-    rustc = rust-bin.selectLatestNightlyWith (toolchain: toolchain.default);
-    
-     };
+  rustPlatform = makeRustPlatform rec {
+    rustc = rust-bin.nightly.latest.default.override {
+      extensions = [ "llvm-tools-preview" ];
+      targets = [ "thumbv7em-none-eabihf" "thumbv8m.main-none-eabi" ];
+    };
+    cargo = rustc;  
+  };
 
 
 in
