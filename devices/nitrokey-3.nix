@@ -37,6 +37,7 @@ let
       # We add rust-src to extensions because otherwise we get a compilation error.
       # rust-src is added to the toolchain in the Dockerfile
       # https://github.com/Nitrokey/nitrokey-3-firmware/blob/main/Dockerfile#L10
+      # TODO: read from the rust-toolchain.toml in upstream repo and add rust-src with overlay?
       extensions = [
         "llvm-tools-preview"
         "rust-src"
