@@ -110,12 +110,6 @@ rustPlatform.buildRustPackage rec {
   # https://github.com/cloud-hypervisor/rust-hypervisor-firmware/issues/249
   auditable = false;
 
-  # removed objdump
-  makeFlags = [
-    "BOARD=${board}"
-    "PROVISIONER=${toString provisioner}"
-    "DEVELOP=${toString develop}"
-  ];
   # nitrokey>   running: "gcc" "-Os" "-ffunction-sections" "-fdata-sections" "-g" "-fno-omit-frame-pointer" "-mthumb" "-mfloat-abi=hard" "-march=armv7e-m" "-mfpu=fpv4-sp-d16" "-Wall" "-Wextra" "-std=c11" "-march=armv7e-m" "-o" "/build/source/target/thumbv7em-none-eabihf/release/build/p256-cortex-m4-sys-b3d4b07b0223ea03/out/P256-Cortex-M4/p256-cortex-m4.o" "-c" "P256-Cortex-M4/p256-cortex-m4.c"
   # nitrokey>   cargo:warning=gcc: error: unrecognized command-line option '-mthumb'
   # nitrokey>   cargo:warning=gcc: error: unrecognized command-line option '-mfloat-abi=hard'
