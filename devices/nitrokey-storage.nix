@@ -1,4 +1,9 @@
-{ lib, stdenv, fetchzip, fetchFromGitHub }:
+{
+  lib,
+  stdenv,
+  fetchzip,
+  fetchFromGitHub,
+}:
 let
   pname = "nitrokey-storage-firmware";
   version = "0.57";
@@ -52,7 +57,10 @@ stdenv.mkDerivation rec {
       --replace '$(shell git describe)' "V${version}"
   '';
 
-  makeFlags = [ "CC=${toolchain}/bin/avr32-gcc" "nitrokey-storage-V${version}-reproducible.hex" ];
+  makeFlags = [
+    "CC=${toolchain}/bin/avr32-gcc"
+    "nitrokey-storage-V${version}-reproducible.hex"
+  ];
 
   enableParallelBuilding = true;
 

@@ -1,4 +1,8 @@
-{ lib, stdenv, fetchFromGitHub }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+}:
 
 stdenv.mkDerivation rec {
   pname = "nitrokey-trng-rs232-firmware";

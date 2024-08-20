@@ -1,5 +1,5 @@
 final: prev: {
-  nitrokey-3 = prev.callPackage ./devices/nitrokey-3.nix {};
+  nitrokey-3 = prev.callPackage ./devices/nitrokey-3.nix { };
   nitrokey-fido2 = prev.callPackage ./devices/nitrokey-fido2.nix { };
   nitrokey-pro = prev.callPackage ./devices/nitrokey-pro.nix { };
   nitrokey-start = prev.callPackage ./devices/nitrokey-start.nix { };
