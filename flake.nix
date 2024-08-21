@@ -28,7 +28,7 @@
             };
             pkgsArm = import nixpkgs {
               inherit system overlays;
-              crossSystem.config = "arm-none-eabi";
+              crossSystem.config = "armv7l-unknown-linux-gnueabihf";
               config.allowUnfree = true; # nitrokey-fido2 → pynitrokey → nrfutil
             };
             pkgsAvr = import nixpkgs {
