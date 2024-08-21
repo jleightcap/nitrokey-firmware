@@ -12,6 +12,9 @@
 
 stdenv.mkDerivation rec {
   pname = "nitrokey-fido2-firmware";
+  # The latest release is found on the releases page; do not rely on the latest tag.
+  # They normally contain the suffix `.nitrokey`.
+  # https://github.com/Nitrokey/nitrokey-fido2-firmware/releases
   version = "2.4.1";
 
   src = fetchFromGitHub {
