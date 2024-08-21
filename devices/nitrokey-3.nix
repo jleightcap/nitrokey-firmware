@@ -17,7 +17,7 @@
 
 let
 
-  pname = "nitrokey-3-firmware";
+  pname = "nitrokey-3-${board}-${lib.optionalString provisioner "provisioner-"}firmware";
   version = "1.7.2";
 
   src = fetchFromGitHub {

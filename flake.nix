@@ -38,7 +38,12 @@
           in
           {
             inherit (pkgs)
-              nitrokey-3
+              nitrokey-3-nk3xn
+              nitrokey-3-nk3xn-provisioner
+              nitrokey-3-nkpk 
+              nitrokey-3-nkpk-provisioner 
+              nitrokey-3-nk3am 
+              nitrokey-3-nk3am-provisioner 
               nitrokey-storage
               ;
             inherit (pkgsArm)
