@@ -24,18 +24,18 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace targets/stm32l432/build/common.mk \
-      --replace '$(shell git describe --abbrev=0 )' "${version}.nitrokey" \
-      --replace '$(shell git describe)' "${version}.nitrokey"
+      --replace-fail '$(shell git describe --abbrev=0 )' "${version}.nitrokey" \
+      --replace-fail '$(shell git describe)' "${version}.nitrokey"
 
     substituteInPlace targets/stm32l432/Makefile \
-      --replace '`git describe --long`' "${version}.nitrokey"
+      --replace-fail '`git describe --long`' "${version}.nitrokey"
 
     substituteInPlace fido2/version.mk \
-      --replace '$(shell git describe)' "${version}.nitrokey"
+      --replace-fail '$(shell git describe)' "${version}.nitrokey"
 
     # otherwise firmware_version is defined multiple times
     substituteInPlace fido2/version.h \
-      --replace "const version_t firmware_version ;" ""
+      --replace-fail "const version_t firmware_version ;" ""
   '';
 
   # only gcc-arm-embedded includes libc_nano.a

@@ -20,8 +20,8 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace build/gcc/dfu.mk \
-      --replace "git submodule update --init --recursive" "" \
-      --replace '$(shell git describe)' "v${version}"
+      --replace-fail "git submodule update --init --recursive" "" \
+      --replace-fail '$(shell git describe)' "v${version}"
 
     patchShebangs dapboot/libopencm3/scripts
   '';

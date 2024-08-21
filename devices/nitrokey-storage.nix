@@ -54,7 +54,7 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace Makefile \
-      --replace '$(shell git describe)' "V${version}"
+      --replace-fail '$(shell git describe)' "V${version}"
   '';
 
   makeFlags = [
