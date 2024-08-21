@@ -13,7 +13,9 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "Nitrokey";
-    repo = pname;
+    # We don't use pname here but follow the patterns here instead
+    # https://github.com/NixOS/nixpkgs/pull/240569#discussion_r1249055170
+    repo = "nitrokey-pro-firmware";
     rev = "v${version}";
     sha256 = "sha256-q+kbEOLA05xR6weAWDA1hx4fVsaN9UNKiOXGxPRfXuI=";
     fetchSubmodules = true;
