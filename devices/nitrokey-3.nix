@@ -38,16 +38,10 @@ let
       # rust-src is added to the toolchain in the Dockerfile
       # https://github.com/Nitrokey/nitrokey-3-firmware/blob/main/Dockerfile#L10
       # TODO: read from the rust-toolchain.toml in upstream repo and add rust-src with overlay?
-      extensions = [
-        "llvm-tools-preview"
-        "rust-src"
-        "rustfmt"
-        "clippy"
-      ];
-      targets = [
-        "thumbv7em-none-eabihf"
-        "thumbv8m.main-none-eabi"
-      ];
+      # Reading the extensions from the developers toolchain
+      extensions = (builtins.fromTOML (builtins.readFile("${src}/rust-toolchain.toml"))).toolchain.components ++ [ "rust-src" ];
+      # Also getting the targets from the toolchain
+      targets = (builtins.fromTOML (builtins.readFile("${src}/rust-toolchain.toml"))).toolchain.targets;
     };
     cargo = rustc;
   };
