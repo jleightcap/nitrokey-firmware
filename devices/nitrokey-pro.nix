@@ -4,6 +4,7 @@
   fetchFromGitHub,
   python3,
   srecord,
+  gcc-arm-embedded,
 }:
 
 stdenv.mkDerivation rec {
@@ -27,6 +28,7 @@ stdenv.mkDerivation rec {
   '';
 
   nativeBuildInputs = [
+    gcc-arm-embedded
     python3
     srecord
   ];
