@@ -2,6 +2,7 @@
   lib,
   stdenv,
   fetchFromGitHub,
+  gcc-arm-embedded,
 }:
 
 stdenv.mkDerivation rec {
@@ -30,6 +31,8 @@ stdenv.mkDerivation rec {
     "--enable-factory-reset"
     "--enable-certdo"
   ];
+
+  nativeBuildInputs = [ gcc-arm-embedded ];
 
   enableParallelBuilding = true;
 
