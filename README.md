@@ -1,3 +1,17 @@
+# Status as of 29/08/2024
+5 out of 6 devices have open PRs on NixOS/nixpkgs.
+
+- [GH-337966](https://github.com/NixOS/nixpkgs/pull/337966)
+- [GH-337959](https://github.com/NixOS/nixpkgs/pull/337959)
+- [GH-337956](https://github.com/NixOS/nixpkgs/pull/337956)
+- [GH-337954](https://github.com/NixOS/nixpkgs/pull/337954)
+- [GH-337951](https://github.com/NixOS/nixpkgs/pull/337951)
+
+
+For nitrokey-3, the rust-overlay is needed to pull an adequate version of the nightly toolchain.
+However, rust-overlay cannot be used inside nixpkgs because it is a flake.nix.
+And using a nightly toolchain is frowned upon because of the maintenance burden.
+
 # Nix flake for building firmware images for Nitrokey devices
 
 This repository provides build instructions for all nitrokey firmware images for [Nix](https://nixos.org/),
